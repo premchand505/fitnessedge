@@ -1,14 +1,28 @@
 import { Suspense } from 'react';
 import ContactForm from './ContactForm';
-import MapPinIcon from '@/components/ui/MapPinIcon'; // Import the new icon
+import { MapPin, Phone, Clock } from 'lucide-react'; // Using better icons
 
 function FormLoading() {
   return (
-    <div className="flex h-96 items-center justify-center rounded-lg bg-secondary-neutral">
+    <div className="flex h-full min-h-[500px] items-center justify-center rounded-lg bg-secondary-neutral">
       <p className="text-lg text-primary-dark/50">Loading form...</p>
     </div>
   );
 }
+
+// A reusable component for contact details to keep the code clean
+function ContactDetail({ icon: Icon, title, children }: { icon: React.ElementType, title: string, children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-4">
+      <Icon className="h-6 w-6 flex shrink-0 text-accent" aria-hidden="true" />
+      <div>
+        <h3 className="font-bold text-primary-dark">{title}</h3>
+        <div className="mt-1 text-primary-dark/80 not-italic">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 
 export default function Contact() {
   return (
@@ -24,44 +38,48 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-16 lg:grid-cols-2">
+        <div className="mt-20 grid grid-cols-1 gap-x-12 gap-y-16 lg:grid-cols-2">
+          {/* Column 1: Contact Form */}
           <Suspense fallback={<FormLoading />}>
             <ContactForm />
           </Suspense>
 
+          {/* Column 2: Map and Details */}
           <div className="flex flex-col">
+            {/* The actual, working map embed */}
             <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-lg">
               <iframe
-                src="http://googleusercontent.com/maps/google.com/1 Cubbon Park!5e0!3m2!1sen!2sin!4v1678886580000"
+                // --- PASTE YOUR EMBED SRC HERE ---
+                src="https://www.google.com/maps/d/embed?mid=1PzRnF3vfl_J_AHP_QPFBZFkObu7rPZk&ehbc=2E312F"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen={false}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale contrast-125"
+                className="absolute inset-0" // Use absolute positioning to fill the container
               ></iframe>
             </div>
             
-            {/* --- THIS IS THE CHANGE --- */}
-            <div className="mt-8 flex flex-col gap-4 text-lg text-primary-dark/80">
-              <p className="flex items-center gap-2">
-                <MapPinIcon className="h-5 w-5 flex shrink-0 text-accent" />
-                <span>
-                  <strong>Visit Us:</strong> 123 Fitness Ave, Cubbon Park,
-                  Bengaluru, 560001
-                </span>
-              </p>
-              <p>
-                <strong className="text-accent">Call Us:</strong>{' '}
-                <a href="tel:+911234567890" className="hover:text-accent">
+            {/* --- CLEANER, ORGANIZED CONTACT DETAILS --- */}
+            <div className="mt-8 flex flex-row gap-6 text-lg">
+              <ContactDetail icon={MapPin} title="Visit Our Gym">
+                <address>
+                  Reliance fresh , Kurmnnapalem<br/>
+                  Vizag, 530046
+                </address>
+              </ContactDetail>
+
+              <ContactDetail icon={Phone} title="Call Us">
+                <a href="tel:+911234567890" className="transition-colors hover:text-accent">
                   +91 12345 67890
                 </a>
-              </p>
-              <p>
-                <strong className="text-accent">Hours:</strong> Mon-Fri: 5am -
-                11pm | Sat-Sun: 7am - 9pm
-              </p>
+              </ContactDetail>
+
+              <ContactDetail icon={Clock} title="Opening Hours">
+                <p>Mon - Sat: 5am - 11pm</p>
+                <p> Sun: 7am - 11am</p>
+              </ContactDetail>
             </div>
           </div>
         </div>

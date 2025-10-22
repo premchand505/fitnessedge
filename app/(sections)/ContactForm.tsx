@@ -6,25 +6,30 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Send, CheckCircle, AlertTriangle } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import FloatingInput from '@/components/ui/FloatingInput';
 
+// 1. Define the schema for form validation
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().min(10, 'Please enter a valid phone number'),
   interest: z.string().min(5, 'Please let us know what you are interested in'),
-  message: z.string().optional(),
 });
 
+// 2. Infer the TypeScript type from the schema
 type ContactFormData = z.infer<typeof contactSchema>;
+
+// 3. Define the possible submission states
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function ContactForm() {
-  const [submissionStatus, setSubmissionStatus] =
-    useState<SubmissionStatus>('idle');
+  const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>('idle');
   const searchParams = useSearchParams();
 
+  // 4. Initialize react-hook-form with the explicit Zod type
+  // This is the key fix for the 'never' type error.
   const {
     register,
     handleSubmit,
@@ -36,6 +41,7 @@ export default function ContactForm() {
     mode: 'onTouched',
   });
 
+  // Effect to populate form from URL parameters
   useEffect(() => {
     const services = searchParams.get('services');
     const duration = searchParams.get('duration');
@@ -49,58 +55,56 @@ export default function ContactForm() {
     }
   }, [searchParams, setValue]);
 
+  // Handle form submission
   const onSubmit = async (data: ContactFormData) => {
     setSubmissionStatus('submitting');
-    console.log('Form Data:', data);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setSubmissionStatus('success');
-    reset();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error('Network response was not ok');
+      setSubmissionStatus('success');
+      reset();
+    } catch (error) {
+      console.error('Failed to submit the form:', error);
+      setSubmissionStatus('error');
+    }
   };
 
-  return (
-    <div className="relative">
-      <AnimatePresence>
-        {submissionStatus === 'success' && (
-          <motion.div
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-lg bg-popup-accent p-8 text-base"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-          >
-            <h3 className="font-heading text-4xl">Thank You!</h3>
-            <p className="mt-2 text-lg">
-              Your message has been sent. We'll be in touch soon.
-            </p>
-            <Button
-              variant="dark"
-              onClick={() => setSubmissionStatus('idle')}
-              className="mt-6"
-            >
-              Send Another
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+  // Effect to reset button state after success/error
+  useEffect(() => {
+    if (submissionStatus === 'success' || submissionStatus === 'error') {
+      const timer = setTimeout(() => setSubmissionStatus('idle'), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [submissionStatus]);
 
+  return (
+    <div className="relative w-full max-w-xl mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-6"
         noValidate
       >
-        <FloatingInput
-          id="name"
-          label="Name"
-          type="text"
-          registration={register('name')}
-          error={errors.name?.message}
-        />
-        <FloatingInput
-          id="email"
-          label="Email"
-          type="email"
-          registration={register('email')}
-          error={errors.email?.message}
-        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <FloatingInput
+            id="name"
+            label="Name"
+            type="text"
+            registration={register('name')}
+            error={errors.name?.message}
+          />
+          <FloatingInput
+            id="email"
+            label="Email"
+            type="email"
+            registration={register('email')}
+            error={errors.email?.message}
+          />
+        </div>
+        
         <FloatingInput
           id="phone"
           label="Phone"
@@ -114,18 +118,55 @@ export default function ContactForm() {
           as="textarea"
           registration={register('interest')}
           error={errors.interest?.message}
+          className="min-h-[150px] resize-y"
         />
 
-        <div className="mt-4">
+        <div className="mt-2">
           <Button
             type="submit"
             variant="solid"
-            className="w-full py-4"
-            disabled={!isValid || submissionStatus === 'submitting'}
+            className="flex w-full items-center justify-center py-3 text-lg"
+            disabled={!isValid || submissionStatus !== 'idle'}
           >
-            {submissionStatus === 'submitting'
-              ? 'Sending...'
-              : 'Submit Now'}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={submissionStatus}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center gap-2"
+              >
+                {submissionStatus === 'submitting' && (
+                  <>
+                    <motion.div
+                      className="h-5 w-5 rounded-full border-2 border-current border-t-transparent"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, ease: 'linear', repeat: Infinity }}
+                    />
+                    <span>Sending...</span>
+                  </>
+                )}
+                 {submissionStatus === 'success' && (
+                  <>
+                    <CheckCircle size={20} />
+                    <span>Message Sent!</span>
+                  </>
+                )}
+                 {submissionStatus === 'error' && (
+                  <>
+                    <AlertTriangle size={20} />
+                    <span>Submission Failed</span>
+                  </>
+                )}
+                {submissionStatus === 'idle' && (
+                  <>
+                    <Send size={18} />
+                    <span>Submit Now</span>
+                  </>
+                )}
+              </motion.div>
+            </AnimatePresence>
           </Button>
         </div>
       </form>

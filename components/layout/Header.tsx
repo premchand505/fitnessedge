@@ -38,7 +38,7 @@ export default function Header() {
         variants={{ visible: { y: 0 }, hidden: { y: '-100%' } }}
         animate={isHidden ? 'hidden' : 'visible'}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="fixed left-0 top-0 z-30 w-full bg-base/80 shadow-md backdrop-blur-md"
+        className="fixed left-0 top-0 z-30 w-full bg-base/80 shadow-md bg-white/90"
       >
         <nav className="container mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link

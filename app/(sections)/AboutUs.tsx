@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import TrainerCard from '@/components/ui/TrainerCard';
 
-// Dummy data for trainers
+
 const trainers = [
   {
     name: 'Alex Ray',
     specialty: 'Strength & Conditioning',
-    // --- THIS IS THE FIX (changed .jpg to .png) ---
+   
     imageSrc: '/images/trainers/trainer-01.png',
   },
   {
@@ -52,8 +52,8 @@ export default function AboutUs() {
       id="about"
       className="relative w-full overflow-hidden bg-secondary-neutral py-24 sm:py-32"
     >
-      <div className="pointer-events-none absolute -left-16 top-1/2 -translate-y-1/2">
-        <h2 className="font-heading text-[12rem] uppercase leading-none text-accent/10 opacity-50 [writing-mode:vertical-rl] sm:text-[18rem]">
+      <div className="pointer-events-none absolute -left-16 top-1/2 text-[#4ddb07] -translate-y-1/2">
+        <h2 className="font-heading text-[12rem] uppercase leading-none   [writing-mode:vertical-rl] sm:text-[18rem]">
           Philosophy
         </h2>
       </div>

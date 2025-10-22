@@ -1,94 +1,83 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  motion,
-  TargetAndTransition,
-  HTMLMotionProps,
-} from 'framer-motion';
+import { motion } from 'framer-motion';
+import React, { type ComponentProps } from 'react'; // <-- FIX IS HERE
 
+// The specific variants your button can have
 type ButtonVariant = 'solid' | 'outline' | 'dark';
 
-// Base props
-interface BaseProps {
+// Base props shared by both the Link and button elements
+type BaseProps = {
   variant?: ButtonVariant;
   children: React.ReactNode;
   className?: string;
-}
-
-// Props for a <button> (no href)
-type ButtonElementProps = BaseProps &
-  Omit<HTMLMotionProps<'button'>, 'children' | 'className'> & {
-    href?: undefined;
-  };
-
-// Props for a Link (with href)
-// We base this on standard anchor attributes now, which Next's Link accepts.
-type AnchorElementProps = BaseProps &
-  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'className'> & {
-    href: string; // href is required
-  };
-
-// Union type for all possible props
-type ButtonProps = ButtonElementProps | AnchorElementProps;
-
-const flickerAnimation: TargetAndTransition = {
-  boxShadow: [
-    '0 0 0px 0px var(--color-accent-light)',
-    '0 0 10px 4px var(--color-accent-light)',
-    '0 0 0px 0px var(--color-accent-light)',
-  ],
-  transition: { duration: 0.3, ease: 'easeInOut', times: [0, 0.5, 1] },
 };
 
-const Button: React.FC<ButtonProps> = ({
+// A much clearer, discriminated union for the props.
+type ButtonProps = BaseProps & (
+  | (Omit<ComponentProps<typeof Link>, 'className'> & { href: string })
+  | (Omit<ComponentProps<typeof motion.button>, 'className'> & { href?: undefined })
+);
+
+const Button = ({
   variant = 'solid',
   children,
   className = '',
   ...props
-}) => {
-  // Common styles
-  const combinedClassName = `
-    relative group inline-flex items-center justify-center px-6 py-3 font-medium tracking-wide 
-    transition-all duration-300 ease-out rounded-md text-md focus:outline-none 
-    focus:ring-2 focus:ring-offset-2
-    ${
-      variant === 'solid'
-        ? 'bg-accent text-primary-dark border-2 border-transparent hover:bg-accent-hover focus:ring-accent'
-        : variant === 'outline'
-        ? 'bg-transparent text-primary-dark border-2 border-primary-dark hover:bg-primary-dark hover:text-base focus:ring-primary-dark'
-        : 'bg-primary-dark text-base border-2 border-transparent hover:bg-gray-800 focus:ring-primary-dark'
-    }
-    ${className}
-  `;
+}: ButtonProps) => {
+  
+  const variantStyles: Record<ButtonVariant, string> = {
+    solid: 'bg-primary text-primary-foreground border-2 border-transparent hover:bg-primary/90 focus-visible:ring-primary',
+    outline: 'bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground focus-visible:ring-primary',
+    dark: 'bg-primary-dark text-primary-foreground border-2 border-transparent hover:bg-primary-dark/90 focus-visible:ring-primary-dark',
+  };
 
-  // If href is present, render a Next.js Link component directly.
+  const baseStyles = `relative group inline-flex items-center justify-center px-6 py-3 font-medium tracking-wide transition-colors duration-300 ease-out rounded-lg text-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 overflow-hidden`;
+  
+  const combinedClassName = `${baseStyles} ${variantStyles[variant]} ${className}`;
+
+  const ShineEffect = () => (
+    <motion.span
+      className="absolute inset-0 block"
+      variants={{
+        hover: {
+          backgroundPosition: ['-100% 0%', '200% 0%'],
+          transition: { duration: 1.2, ease: 'linear' },
+        },
+      }}
+      style={{
+        backgroundImage: 'linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.3) 50%, transparent 80%)',
+      }}
+    />
+  );
+  
   if (props.href) {
-    const { href, ...anchorProps } = props as AnchorElementProps;
     return (
-      // --- FIX ---
-      // Removed `legacyBehavior` and the inner `motion.a`.
-      // The `Link` component now receives the styles and acts as the anchor tag.
-      <Link href={href} className={combinedClassName} {...anchorProps}>
-        <motion.span
-          className="absolute inset-0 rounded-md"
-          whileHover={variant === 'solid' ? flickerAnimation : undefined}
-        />
-        <span className="relative z-10">{children}</span>
-      </Link>
+      <motion.div whileTap={{ scale: 0.97 }} className="inline-block">
+        <Link {...(props as ComponentProps<typeof Link>)} className={combinedClassName}>
+          <motion.div
+            className="absolute inset-0"
+            whileHover="hover"
+            initial={{ backgroundPosition: '-100% 0%' }}
+          >
+            {variant !== 'outline' && <ShineEffect />}
+          </motion.div>
+          <span className="relative z-10">{children}</span>
+        </Link>
+      </motion.div>
     );
   }
 
-  // If no href, render a motion.button tag.
   return (
     <motion.button
+      {...(props as ComponentProps<typeof motion.button>)}
       className={combinedClassName}
-      {...(props as ButtonElementProps)} // Spread remaining 'button' props
+      whileTap={{ scale: 0.97 }}
+      whileHover="hover"
+      initial={{ backgroundPosition: '-100% 0%' }}
     >
-      <motion.span
-        className="absolute inset-0 rounded-md"
-        whileHover={variant === 'solid' ? flickerAnimation : undefined}
-      />
+      {variant !== 'outline' && <ShineEffect />}
       <span className="relative z-10">{children}</span>
     </motion.button>
   );

@@ -1,80 +1,50 @@
 'use client';
 
-import Image from 'next/image';
 import Button from '@/components/ui/Button'; // Assuming your Button component is here
 import { motion, Variants } from 'framer-motion';
 import React from 'react';
 
-// Animation variants for the main container to orchestrate the animations
+// Animation variants (no changes here)
 const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15, // Slightly faster stagger for more dynamic feel
-      delayChildren: 0.3, // Delay the first child's animation
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
     },
   },
 };
 
-// Animation for individual text lines
-const lineVariants: Variants = {
-  hidden: { opacity: 0, y: 50, skewY: 5 }, // SkewY for a subtle dramatic entrance
+const lineRevealVariant: Variants = {
+  hidden: { y: '110%' },
   visible: {
-    opacity: 1,
+    y: '0%',
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const fadeUpVariant: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
     y: 0,
-    skewY: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 120,
-      damping: 10,
-    },
-  },
-};
-
-// Animation for the description text
-const descriptionVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.6,
       ease: 'easeOut',
-      delay: 0.6, // Delay after the main heading
     },
   },
 };
 
-// Animation for the call-to-action button
-const buttonVariant: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
+const lineDrawVariant: Variants = {
+  hidden: { scaleX: 0 },
   visible: {
-    opacity: 1,
-    scale: 1,
+    scaleX: 1,
     transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 10,
-      delay: 1.0, // Delay after description
-    },
-  },
-};
-
-// Animation for the overlay effect
-const overlayVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1.5, ease: 'easeOut' } },
-};
-
-// Animation for the main hero image (subtle zoom/pan)
-const imageMotionVariants: Variants = {
-  hidden: { scale: 1.1, opacity: 0.8 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      duration: 2.5,
-      ease: 'easeOut',
+      duration: 1,
+      ease: [0.83, 0, 0.17, 1],
     },
   },
 };
@@ -83,84 +53,69 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-base text-white"
+      className="relative flex min-h-screen w-full items-end justify-start overflow-hidden bg-black text-white"
     >
-      {/* Dynamic Background Image - Strong visual statement */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          variants={imageMotionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="absolute inset-0"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover"
+          // A poster image is important for load times and mobile devices
+          poster="/images/gym-poster.jpeg" // IMPORTANT: Place a poster image in public/images
         >
-          <Image
-            src="https://images.unsplash.com/photo-1549476465-b91c12e4f014?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80"
-            alt="Intense close-up of a determined athlete"
-            fill
-            className="object-cover object-center"
-            priority
-            sizes="100vw"
-          />
-        </motion.div>
-        {/* Gradients and Overlay for text readability and dramatic effect */}
-        <motion.div
-          variants={overlayVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          className="absolute inset-0 bg-linear-to-t from-base via-base/60 to-transparent" // Darker base at bottom
-        ></motion.div>
-        <div className="absolute inset-0 bg-black/50"></div> {/* General dark overlay */}
+          {/* ===================================================================
+            FIX: The video source now points to a file in your public folder.
+            ===================================================================
+          */}
+          <source src="/gym-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent"></div>
       </div>
 
-      {/* Content */}
-      <div className="container relative z-10 mx-auto max-w-6xl px-6 text-center">
+      {/* Content (No changes here) */}
+      <div className="container relative z-10 mx-auto max-w-7xl px-6 pb-20 md:px-8 md:pb-24">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          className="flex flex-col items-center"
+          viewport={{ once: true, amount: 0.3 }}
+          className="flex flex-col items-start"
         >
-          {/* Main Headline - Broken into lines for dramatic animation */}
-          <h1 className="font-heading text-6xl font-extrabold uppercase leading-none md:text-7xl lg:text-8xl xl:text-9xl">
-            <motion.span
-              variants={lineVariants}
-              className="block overflow-hidden"
-            >
-              <span className="block">Unleash</span>
-            </motion.span>
-            <motion.span
-              variants={lineVariants}
-              className="block overflow-hidden"
-            >
-              <span className="block">Your Inner</span>
-            </motion.span>
-            <motion.span
-              variants={lineVariants}
-              className="block overflow-hidden text-accent"
-            >
-              <span className="block">Power.</span>
-            </motion.span>
+          <motion.div
+            variants={lineDrawVariant}
+            className="mb-4 h-[2px] w-24 origin-left bg-accent"
+          ></motion.div>
+
+          <h1 className="font-heading text-5xl font-extrabold uppercase leading-tight tracking-tighter md:text-xl lg:text-7xl xl:text-8xl">
+            <div className="overflow-hidden py-1">
+              <motion.div variants={lineRevealVariant}>Your Comfort</motion.div>
+            </div>
+            <div className="overflow-hidden py-1">
+              <motion.div variants={lineRevealVariant}>Zone Is A</motion.div>
+            </div>
+            <div className="overflow-hidden py-1">
+              <motion.div variants={lineRevealVariant} className="text-[#4ddb07]">
+                Cage.
+              </motion.div>
+            </div>
           </h1>
 
-          {/* Tagline/Description */}
           <motion.p
-            variants={descriptionVariants}
-            className="mt-8 max-w-3xl text-xl font-light text-gray-200 md:text-2xl lg:text-3xl"
+            variants={fadeUpVariant}
+            className="mt-8 max-w-md text-lg font-light text-accent md:text-xl"
           >
-            Forge strength, define purpose, and break limits. This is where your transformation begins.
+            Break free. We provide the tools. You provide the will.
           </motion.p>
 
-          {/* Call to Action Button */}
-          <motion.div variants={buttonVariant} className="mt-12">
+          <motion.div variants={fadeUpVariant} className="mt-10">
             <Button
-              href="/#contact" // Assuming this is your contact section
+              href="/#contact"
               variant="solid"
-              className="px-12 py-5 text-xl font-bold uppercase tracking-wider"
+              className="px-10 py-4 text-lg font-bold uppercase  texttracking-widest"
             >
-              Start Your Journey
+              Escape
             </Button>
           </motion.div>
         </motion.div>

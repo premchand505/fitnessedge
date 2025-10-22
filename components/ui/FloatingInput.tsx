@@ -1,73 +1,71 @@
-'use client';
-
-import { ComponentProps } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import { motion, AnimatePresence } from 'framer-motion';
 
-type BaseProps = {
+interface FloatingInputProps {
   id: string;
   label: string;
   registration: UseFormRegisterReturn;
+  type?: string;
+  as?: 'input' | 'textarea';
   error?: string;
-};
-
-type InputProps = BaseProps & {
-  as?: 'input';
-} & ComponentProps<'input'>;
-
-type TextareaProps = BaseProps & {
-  as: 'textarea';
-} & ComponentProps<'textarea'>;
-
-type FloatingInputProps = InputProps | TextareaProps;
+  className?: string;
+}
 
 const FloatingInput: React.FC<FloatingInputProps> = ({
   id,
   label,
   registration,
-  error,
+  type = 'text',
   as = 'input',
-  ...props
+  error,
+  className = '',
 }) => {
+  const commonProps = {
+    id,
+    ...registration,
+    placeholder: ' ', // This space is crucial for the :placeholder-shown selector
+    className: `
+      peer block w-full appearance-none bg-transparent px-3 pb-2 pt-4
+      border-2 rounded-lg
+      text-base text-[var(--foreground)] border-[var(--border)]
+      focus:outline-none focus:ring-0 focus:border-[var(--primary)]
+      transition-colors duration-300
+    `,
+  };
+
+  const MotionLabel = motion.label;
+
   return (
-    <div className="relative z-0">
+    <div className="relative w-full">
       {as === 'textarea' ? (
-        <textarea
-          id={id}
-          className={`
-            peer block w-full appearance-none border-b-2 bg-transparent px-0 py-2.5 
-            text-md text-primary-dark focus:outline-none focus:ring-0
-            ${error ? 'border-form-error' : 'border-primary-dark/30 focus:border-accent'}
-          `}
-          placeholder=" "
-          rows={4}
-          {...registration}
-          {...(props as ComponentProps<'textarea'>)}
-        />
+        <textarea {...commonProps} rows={5} className={`${commonProps.className} ${className}`} />
       ) : (
-        <input
-          id={id}
-          className={`
-            peer block w-full appearance-none border-b-2 bg-transparent px-0 py-2.5 
-            text-md text-primary-dark focus:outline-none focus:ring-0
-            ${error ? 'border-form-error' : 'border-primary-dark/30 focus:border-accent'}
-          `}
-          placeholder=" "
-          {...registration}
-          {...(props as ComponentProps<'input'>)}
-        />
+        <input type={type} {...commonProps} className={`${commonProps.className} ${className}`} />
       )}
-      <label
+      <MotionLabel
         htmlFor={id}
-        className={`
-          absolute top-3 -z-10 origin-left -translate-y-6 scale-75 transform text-md duration-300
-          peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
-          peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75
-          ${error ? 'text-form-error' : 'text-primary-dark/60 peer-focus:text-accent'}
-        `}
+        className="
+          absolute left-3 top-3.5 origin-left transform 
+          text-base text-(--foreground-muted) duration-300 ease-in-out
+          peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0
+          peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-(--primary)
+          peer-[:not(:placeholder-shown)]:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-3
+        "
       >
         {label}
-      </label>
-      {error && <p className="mt-1 text-xs text-form-error">{error}</p>}
+      </MotionLabel>
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mt-1 text-sm text-(--destructive)"
+          >
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
