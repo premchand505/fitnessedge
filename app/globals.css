@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Base & Text */
+    --color-base: #ffffff; 
+    --color-primary-dark: #000000; 
+    --color-secondary-neutral: #000000;
+
+    /* Energetic Accents */
+    --color-accent: #4ddb07; 
+    --color-accent-hover: #93fe58; 
+    --color-accent-light: #beff95; 
+
+    /* Popup/Special Accent */
+    --color-popup-accent: #006aff;
+
+    /* Form States */
+    --color-form-success: #4ddb07; 
+    --color-form-error: #ff0000; 
+    
+    /* Typography Variables (From tailwind.config.ts) */
+    --font-heading: var(--font-bebas-neue);
+    --font-body: var(--font-inter); 
+
+    /* Tailwind Mappings (Optional, but useful for generic global styles) */
+    --color-primary-alias: var(--color-accent); /* Map the 'primary action' color */
+    --color-background-alias: var(--color-base); 
+    --color-foreground-alias: var(--color-primary-dark);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* --- 2. GLOBAL STYLES & TYPOGRAPHY --- */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    /* Apply base colors and font using provided variable names/aliases */
+    background-color: var(--color-base); 
+    color: var(--color-primary-dark);
+    font-family: var(--font-body), sans-serif; /* Apply Inter as default */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading), sans-serif; /* Apply Bebas Neue for headings */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+}
+
+section {
+    min-height: auto; 
+    padding-top: 5rem; 
+    padding-bottom: 5rem;
+}
+
+a {
+    transition: color 0.2s ease-in-out;
+    color: var(--color-primary-dark); /* Default black/dark text */
+    text-decoration: none;
+}
+a:hover {
+    color: var(--color-accent); /* Use the main accent color for hover */
+    text-decoration: underline;
 }
