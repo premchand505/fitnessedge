@@ -49,8 +49,8 @@ export default function Services() {
                     onMouseEnter={() => setActiveServiceId(service.id)}
                     className={`w-full rounded-lg p-6 text-left transition-all duration-300 ${
                       activeServiceId === service.id
-                        ? 'bg-accent text-primary-dark shadow-lg'
-                        : 'bg-secondary-neutral text-primary-dark/70 hover:bg-white hover:text-primary-dark hover:shadow-md'
+                        ? 'bg-accent text-base shadow-lg'
+                        : 'bg-secondary-neutral text-base hover:bg-white hover:text-primary-dark hover:shadow-md'
                     }`}
                   >
                     <span className="font-heading text-3xl uppercase">
@@ -63,7 +63,7 @@ export default function Services() {
           </div>
 
           {/* --- More Color --- */}
-          <div className="relative min-h-[500px] overflow-hidden rounded-lg bg-secondary-neutral p-8 lg:col-span-8 border-2 border-accent/20">
+          <div className="relative min-h-[500px] overflow-hidden rounded-lg bg-base p-8 lg:col-span-8 border-2 border-accent/20">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeServiceId}

@@ -63,7 +63,7 @@ export default function Hero() {
           playsInline
           className="h-full w-full object-cover"
           // A poster image is important for load times and mobile devices
-          poster="/images/gym-poster.jpeg" // IMPORTANT: Place a poster image in public/images
+          poster="/images/gym-poster.jpg" // IMPORTANT: Place a poster image in public/images
         >
           {/* ===================================================================
             FIX: The video source now points to a file in your public folder.

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 
-:root {
+@theme{
     /* Base & Text */
     --color-base: #ffffff; 
     --color-primary-dark: #000000; 
@@ -24,9 +24,9 @@
     --font-body: var(--font-inter); 
 
     /* Tailwind Mappings (Optional, but useful for generic global styles) */
-    --color-primary-alias: var(--color-accent); /* Map the 'primary action' color */
-    --color-background-alias: var(--color-base); 
-    --color-foreground-alias: var(--color-primary-dark);
+    --color-primary: var(--color-accent); /* Map the 'primary action' color */
+    --color-background: var(--color-base); 
+    --color-foreground: var(--color-primary-dark);
 }
 
 /* --- 2. GLOBAL STYLES & TYPOGRAPHY --- */
@@ -51,6 +51,7 @@ section {
     min-height: auto; 
     padding-top: 5rem; 
     padding-bottom: 5rem;
+    overflow: hidden;
 }
 
 a {

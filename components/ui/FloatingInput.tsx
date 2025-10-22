@@ -23,7 +23,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
   const commonProps = {
     id,
     ...registration,
-    placeholder: ' ', // This space is crucial for the :placeholder-shown selector
+    placeholder: ' ', // This space is still needed for the peer selector
     className: `
       peer block w-full appearance-none bg-transparent px-3 pb-2 pt-4
       border-2 rounded-lg
@@ -45,11 +45,14 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
       <MotionLabel
         htmlFor={id}
         className="
-          absolute left-3 top-3.5 origin-left transform 
-          text-base text-(--foreground-muted) duration-300 ease-in-out
-          peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0
-          peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-(--primary)
-          peer-[:not(:placeholder-shown)]:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-3
+          absolute left-3 top-3.5 origin-left transform
+          /* --- KEY CHANGE: These are now the default styles --- */
+          scale-75 -translate-y-3
+          /* --------------------------------------------------- */
+          text-base text(--foreground-muted) duration-300 ease-in-out
+          /* Removed peer-placeholder-shown styles */
+          /* Color still changes on focus */
+          peer-focus:text-(--primary)
         "
       >
         {label}
@@ -60,7 +63,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="mt-1 text-sm text-(--destructive)"
+            className="mt-1 text-sm ext-(--destructive)" // Corrected CSS variable syntax
           >
             {error}
           </motion.p>

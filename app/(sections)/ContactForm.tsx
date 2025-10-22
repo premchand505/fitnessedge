@@ -25,11 +25,11 @@ type ContactFormData = z.infer<typeof contactSchema>;
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function ContactForm() {
-  const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>('idle');
+  const [submissionStatus, setSubmissionStatus] =
+    useState<SubmissionStatus>('idle');
   const searchParams = useSearchParams();
 
-  // 4. Initialize react-hook-form with the explicit Zod type
-  // This is the key fix for the 'never' type error.
+  // 4. Initialize react-hook-form
   const {
     register,
     handleSubmit,
@@ -81,20 +81,26 @@ export default function ContactForm() {
     }
   }, [submissionStatus]);
 
+  // Define common input styles for consistency
+  const inputStyles = "bg-white border border-neutral-400 text-black placeholder:text-black focus:border-black";
+
   return (
-    <div className="relative w-full max-w-xl mx-auto">
+    // Set base text color to black for any labels or error messages
+    <div className="relative w-full max-w-xl mx-auto text-black">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-6"
         noValidate
       >
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {/* Apply the common styles to each input */}
           <FloatingInput
             id="name"
             label="Name"
             type="text"
             registration={register('name')}
             error={errors.name?.message}
+            className={inputStyles}
           />
           <FloatingInput
             id="email"
@@ -102,15 +108,17 @@ export default function ContactForm() {
             type="email"
             registration={register('email')}
             error={errors.email?.message}
+            className={inputStyles}
           />
         </div>
-        
+
         <FloatingInput
           id="phone"
           label="Phone"
           type="tel"
           registration={register('phone')}
           error={errors.phone?.message}
+          className={inputStyles}
         />
         <FloatingInput
           id="interest"
@@ -118,7 +126,8 @@ export default function ContactForm() {
           as="textarea"
           registration={register('interest')}
           error={errors.interest?.message}
-          className="min-h-[150px] resize-y"
+          // Merge common styles with specific textarea styles
+          className={`${inputStyles} min-h-[150px] resize-y`}
         />
 
         <div className="mt-2">
@@ -142,18 +151,22 @@ export default function ContactForm() {
                     <motion.div
                       className="h-5 w-5 rounded-full border-2 border-current border-t-transparent"
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 1, ease: 'linear', repeat: Infinity }}
+                      transition={{
+                        duration: 1,
+                        ease: 'linear',
+                        repeat: Infinity,
+                      }}
                     />
                     <span>Sending...</span>
                   </>
                 )}
-                 {submissionStatus === 'success' && (
+                {submissionStatus === 'success' && (
                   <>
                     <CheckCircle size={20} />
                     <span>Message Sent!</span>
                   </>
                 )}
-                 {submissionStatus === 'error' && (
+                {submissionStatus === 'error' && (
                   <>
                     <AlertTriangle size={20} />
                     <span>Submission Failed</span>

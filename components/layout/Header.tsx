@@ -45,7 +45,7 @@ export default function Header() {
             href="/#home"
             className="flex shrink-0 items-center gap-2 group"
           >
-            <Image src="/logo.svg" alt="Fitness Edge Logo" width={32} height={32} />
+            <Image src="/fitnessedge.svg" alt="Fitness Edge Logo" width={32} height={32} />
             <span className="font-heading text-2xl font-bold uppercase tracking-wider text-primary-dark transition-colors group-hover:text-accent">
               Fitness Edge
             </span>
@@ -70,7 +70,7 @@ export default function Header() {
               {/* Replaced hardcoded number with the live component */}
               <VisitCounter />
             </div>
-            <Button href="#" variant="outline" className="py-2 text-sm">
+            <Button href="https://play.google.com/store/apps/details?id=com.fitgymsoftware.fitnessedge&pcampaignid=web_share" variant="outline" className="py-2 text-sm">
               Download App
             </Button>
             <Button href="/#contact" variant="solid" className="py-2 text-sm">

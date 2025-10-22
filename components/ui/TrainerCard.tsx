@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 const cardVariants: Variants = {
-  initial: { filter: 'grayscale(100%)', scale: 1 },
+  initial: { filter: 'grayscale(0%)', scale: 1 },
   hover: {
     filter: 'grayscale(0%)',
     scale: 1.05,
@@ -51,8 +51,8 @@ const TrainerCard: React.FC<TrainerCardProps> = ({
         className="absolute bottom-0 left-0 w-full bg-linear-to-t from-primary-dark/80 to-transparent p-4"
         variants={nameVariants}
       >
-        <h3 className="font-heading text-2xl uppercase text-accent">{name}</h3>
-        <p className="text-sm font-medium ">{specialty}</p>
+        <h3 className="font-heading text-2xl uppercase text-white">{name}</h3>
+        <p className="text-sm  text-white font-medium ">{specialty}</p>
       </motion.div>
     </motion.div>
   );

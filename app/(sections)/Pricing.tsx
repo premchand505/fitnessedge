@@ -64,7 +64,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="w-full bg-secondary-neutral py-24 sm:py-32"
+      className="w-full bg-base py-24 sm:py-32"
     >
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
@@ -189,8 +189,12 @@ export default function Pricing() {
                 </div>
               </div>
 
-              <div className="mt-8">
-                <Link href={lockInHref} legacyBehavior>
+              <div className=" flex gap-2 flex-col mt-8">
+                <Link href="#contact" legacyBehavior>
+                <div>
+                   <h3 className="font-heading text-lg uppercase text-accent">
+                Step 3: Click this and get a call from us
+              </h3>
                   <Button
                     variant="solid"
                     className="w-full py-4"
@@ -198,6 +202,8 @@ export default function Pricing() {
                   >
                     Lock In This Rate
                   </Button>
+                </div>
+               
                 </Link>
               </div>
             </div>

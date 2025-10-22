@@ -50,7 +50,7 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="relative w-full overflow-hidden bg-secondary-neutral py-24 sm:py-32"
+      className="relative w-full overflow-hidden bg-base py-24 sm:py-32"
     >
       <div className="pointer-events-none absolute -left-16 top-1/2 text-[#4ddb07] -translate-y-1/2">
         <h2 className="font-heading text-[12rem] uppercase leading-none   [writing-mode:vertical-rl] sm:text-[18rem]">
@@ -102,8 +102,8 @@ export default function AboutUs() {
           </motion.div>
         </div>
 
-        <div className="mt-32">
-          <h2 className="text-center font-heading text-5xl uppercase text-primary-dark sm:text-6xl">
+        <div className="mt-32 z-30">
+          <h2 className="text-center font-heading text-5xl  uppercase text-primary-dark sm:text-6xl">
             Meet The <span className="text-accent">Crew</span>
           </h2>
 

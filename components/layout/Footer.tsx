@@ -25,17 +25,17 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-dark text-background" aria-labelledby="footer-heading">
+    <footer className="bg-primary-dark/40 text-background" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Footer</h2>
-      <div className="container mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+      <div className="container mx-auto max-w-7xl px-6 pb-8 pt-16  sm:pt-24 lg:px-8 lg:pt-32">
         {/* --- LAYOUT IMPROVEMENT: Simplified, responsive grid --- */}
-        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className="grid grid-cols-2 gap-12 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           
           {/* 1. Brand and Social Column */}
           <div className="flex flex-col items-start gap-4">
             <Link href="/#home" className="flex items-center gap-2">
               <Image
-                src="/logo-white.svg"
+                src="/fitnessedge.svg"
                 alt="Fitness Edge Logo"
                 width={32}
                 height={32}
