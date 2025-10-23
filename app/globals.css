@@ -2,31 +2,46 @@
 
 
 @theme{
-    /* Base & Text */
-    --color-base: #ffffff; 
-    --color-primary-dark: #000000; 
-    --color-secondary-neutral: #000000;
+  --color-accent-50: #fcffe5;
+  --color-accent-100: #f5ffc7;
+  --color-accent-200: #eaff96;
+  --color-accent-300: #d9fe58;
+  --color-accent-400: #c2f41f;
+  --color-accent-500: #a5db07;
+  --color-accent-600: #80af01;
+  --color-accent-700: #608506;
+  --color-accent-800: #4d680c;
+  --color-accent-900: #40580f;
+  --color-accent-950: #213102;
 
-    /* Energetic Accents */
-    --color-accent: #4ddb07; 
-    --color-accent-hover: #93fe58; 
-    --color-accent-light: #beff95; 
+  /* Black Palette */
+  --color-black-50: #f6f6f6;
+  --color-black-100: #e7e7e7;
+  --color-black-200: #d1d1d1;
+  --color-black-300: #b0b0b0;
+  --color-black-400: #888888;
+  --color-black-500: #6d6d6d;
+  --color-black-600: #5d5d5d;
+  --color-black-700: #4f4f4f;
+  --color-black-800: #454545;
+  --color-black-900: #3d3d3d;
+  --color-black-950: #000000;
 
-    /* Popup/Special Accent */
-    --color-popup-accent: #006aff;
+  /* White Palette */
+  --color-white-50: #ffffff;
+  --color-white-100: #efefef;
+  --color-white-200: #dcdcdc;
+  --color-white-300: #bdbdbd;
+  --color-white-400: #989898;
+  --color-white-500: #7c7c7c;
+  --color-white-600: #656565;
+  --color-white-700: #525252;
+  --color-white-800: #464646;
+  --color-white-900: #3d3d3d;
+  --color-white-950: #292929;
 
-    /* Form States */
-    --color-form-success: #4ddb07; 
-    --color-form-error: #ff0000; 
-    
-    /* Typography Variables (From tailwind.config.ts) */
-    --font-heading: var(--font-bebas-neue);
-    --font-body: var(--font-inter); 
-
-    /* Tailwind Mappings (Optional, but useful for generic global styles) */
-    --color-primary: var(--color-accent); /* Map the 'primary action' color */
-    --color-background: var(--color-base); 
-    --color-foreground: var(--color-primary-dark);
+  /* Fonts */
+  --font-inter: 'Inter', sans-serif;
 }
 
 /* --- 2. GLOBAL STYLES & TYPOGRAPHY --- */

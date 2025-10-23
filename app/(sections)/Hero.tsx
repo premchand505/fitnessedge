@@ -53,7 +53,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full items-end justify-start overflow-hidden bg-black text-white"
+      className="relative flex min-h-screen w-full items-end justify-start overflow-hidden bg-linear-to-r from-black-950 to to-black-900 "
     >
       <div className="absolute inset-0 z-0">
         <video
@@ -88,15 +88,15 @@ export default function Hero() {
             className="mb-4 h-[2px] w-24 origin-left bg-accent"
           ></motion.div>
 
-          <h1 className="font-heading text-5xl font-extrabold uppercase leading-tight tracking-tighter md:text-xl lg:text-7xl xl:text-8xl">
-            <div className="overflow-hidden py-1">
+          <h1 className="font-heading text-5xl font-extrabold uppercase leading-tight tracking-tighter md:text-8xl ">
+            <div className="overflow-hidden py-1 text-transparent bg-clip-text bg-linear-to-b from-white  to-white/50">
               <motion.div variants={lineRevealVariant}>Your Comfort</motion.div>
             </div>
-            <div className="overflow-hidden py-1">
+            <div className="overflow-hidden py-1 text-transparent bg-clip-text bg-linear-to-b from-white  to-white/50">
               <motion.div variants={lineRevealVariant}>Zone Is A</motion.div>
             </div>
-            <div className="overflow-hidden py-1">
-              <motion.div variants={lineRevealVariant} className="text-[#4ddb07]">
+            <div className="overflow-hidden py-1 bg-clip-text bg-linear-to-r from-accent-600  text-transparent to-accent-200">
+              <motion.div variants={lineRevealVariant} >
                 Cage.
               </motion.div>
             </div>
@@ -104,7 +104,7 @@ export default function Hero() {
 
           <motion.p
             variants={fadeUpVariant}
-            className="mt-8 max-w-md text-lg font-light text-accent md:text-xl"
+            className="mt-8 max-w-md text-lg font-light text-accent-300 md:text-xl"
           >
             Break free. We provide the tools. You provide the will.
           </motion.p>

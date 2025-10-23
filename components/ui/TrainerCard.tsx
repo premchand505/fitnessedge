@@ -48,7 +48,7 @@ const TrainerCard: React.FC<TrainerCardProps> = ({
       />
 
       <motion.div
-        className="absolute bottom-0 left-0 w-full bg-linear-to-t from-primary-dark/80 to-transparent p-4"
+        className="absolute bottom-0 left-0 w-full bg-linear-to-t from-black-950 to-transparent p-4"
         variants={nameVariants}
       >
         <h3 className="font-heading text-2xl uppercase text-white">{name}</h3>

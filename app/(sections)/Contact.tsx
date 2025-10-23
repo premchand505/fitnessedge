@@ -14,10 +14,10 @@ function FormLoading() {
 function ContactDetail({ icon: Icon, title, children }: { icon: React.ElementType, title: string, children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-4">
-      <Icon className="h-6 w-6 flex shrink-0 text-accent" aria-hidden="true" />
+      <Icon className="h-6 w-6 flex shrink-0 text-accent-400" aria-hidden="true" />
       <div>
-        <h3 className="font-bold text-primary-dark">{title}</h3>
-        <div className="mt-1 text-primary-dark/80 not-italic">{children}</div>
+        <h3 className="font-bold text-transparent bg-clip-text bg-linear-to-b from-white to-white/50">{title}</h3>
+        <div className="mt-1 text-transparent bg-clip-text bg-linear-to-b from-white to-white/50 not-italic">{children}</div>
       </div>
     </div>
   );
@@ -26,13 +26,13 @@ function ContactDetail({ icon: Icon, title, children }: { icon: React.ElementTyp
 
 export default function Contact() {
   return (
-    <section id="contact" className="w-full bg-base py-24 sm:py-32">
+    <section id="contact" className="w-full bg-base py-24 sm:py-32 bg-linear-to-r from-black-950 to to-black-900">
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="font-heading text-5xl uppercase text-primary-dark sm:text-6xl">
-            Join The <span className="text-accent">Reinvention</span>
+          <h2 className="font-heading text-5xl uppercase text-transparent bg-clip-text bg-linear-to-b from-white to-white/50 sm:text-6xl">
+            Join The <span className="text-accent-400">Reinvention</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-dark/80">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-transparent bg-clip-text bg-linear-to-b from-white to-white/50">
             Ready to find your edge? Send us a message or visit us in person.
             Your transformation starts now.
           </p>
@@ -62,25 +62,26 @@ export default function Contact() {
             </div>
             
             {/* --- CLEANER, ORGANIZED CONTACT DETAILS --- */}
-            <div className="mt-8 flex flex-row gap-6 text-lg">
-              <ContactDetail icon={MapPin} title="Visit Our Gym">
-                <address>
-                  Reliance fresh , Kurmnnapalem<br/>
-                  Vizag, 530046
-                </address>
-              </ContactDetail>
+            <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 text-lg">
+  <ContactDetail icon={MapPin} title="Visit Our Gym">
+    <address className="not-italic">
+      Reliance fresh , Kurmnnapalem
+      <br />
+      Vizag, 530046
+    </address>
+  </ContactDetail>
 
-              <ContactDetail icon={Phone} title="Call Us">
-                <a href="tel:+911234567890" className="transition-colors hover:text-accent">
-                  +91 12345 67890
-                </a>
-              </ContactDetail>
+  <ContactDetail icon={Phone} title="Call Us">
+    <a href="tel:+911234567890" className="transition-colors hover:text-accent">
+      +91 12345 67890
+    </a>
+  </ContactDetail>
 
-              <ContactDetail icon={Clock} title="Opening Hours">
-                <p>Mon - Sat: 5am - 11pm</p>
-                <p> Sun: 7am - 11am</p>
-              </ContactDetail>
-            </div>
+  <ContactDetail icon={Clock} title="Opening Hours">
+    <p>Mon - Sat: 5am - 11pm</p>
+    <p> Sun: 7am - 11am</p>
+  </ContactDetail>
+</div>
           </div>
         </div>
       </div>

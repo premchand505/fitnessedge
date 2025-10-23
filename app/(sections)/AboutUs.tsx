@@ -50,13 +50,13 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="relative w-full overflow-hidden bg-base py-24 sm:py-32"
+      className="relative w-full overflow-hidden bg-base py-24 sm:py-32 bg-linear-to-r from-black-950 to to-black-900"
     >
-      <div className="pointer-events-none absolute -left-16 top-1/2 text-[#4ddb07] -translate-y-1/2">
-        <h2 className="font-heading text-[12rem] uppercase leading-none   [writing-mode:vertical-rl] sm:text-[18rem]">
-          Philosophy
-        </h2>
-      </div>
+      <div className="pointer-events-none absolute -left-16 top-1/2 text-transparent bg-clip-text bg-linear-to-t from-white-200 to-white-600 -translate-y-1/2 hidden sm:block">
+  <h2 className="font-heading text-[12rem] uppercase leading-none [writing-mode:vertical-rl] sm:text-[18rem]">
+    Philosophy
+  </h2>
+</div>
 
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -85,16 +85,16 @@ export default function AboutUs() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
-            <h2 className="font-heading text-5xl uppercase text-primary-dark sm:text-6xl">
-              Our <span className="text-accent">Philosophy</span>
+            <h2 className="font-heading text-5xl uppercase text-transparent bg-clip-text bg-linear-to-b from-white  to-white/50 sm:text-6xl">
+              Our <span className="text-accent-400">Philosophy</span>
             </h2>
-            <p className="mt-6 text-lg leading-8 text-primary-dark/80">
+            <p className="mt-6 text-lg leading-8 text-transparent bg-clip-text bg-linear-to-b from-white  to-white/50">
               At FITNESS EDGE, we believe fitness is a journey of inclusive,
               personal reinvention. We're not just a gym; we're a community
               dedicated to helping everyone—from beginners to seasoned athletes—
               find their unique edge.
             </p>
-            <p className="mt-4 text-lg leading-8 text-primary-dark/80">
+            <p className="mt-4 text-lg leading-8 text-transparent bg-clip-text bg-linear-to-b from-white  to-white/50">
               Our expert trainers and premium facilities provide the foundation,
               but your discipline and spirit build the legacy. We are committed
               to creating a space where everyone feels empowered to transform.
@@ -103,8 +103,8 @@ export default function AboutUs() {
         </div>
 
         <div className="mt-32 z-30">
-          <h2 className="text-center font-heading text-5xl  uppercase text-primary-dark sm:text-6xl">
-            Meet The <span className="text-accent">Crew</span>
+          <h2 className="text-center font-heading text-5xl  uppercase text-transparent bg-clip-text bg-linear-to-b from-white to-white/50 sm:text-6xl">
+            Meet The <span className="text-accent-400">Crew</span>
           </h2>
 
           <div className="mt-16 flex gap-6 overflow-x-auto pb-8 pl-6 lg:pl-8">
