@@ -21,8 +21,8 @@ export async function POST(request: Request) {
 
     // Use Resend to send the email
     const { data, error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>', // Use a default for now, but set up your own domain in Resend for production
-      to: ['prem595pop@gmail.com'], // <-- 🚨 REPLACE THIS with the email address where you want to receive submissions
+      from: 'GYM <onboarding@resend.dev>', // Use a default for now, but set up your own domain in Resend for production
+      to: ['officalappuson@gmail.com'], // <-- 🚨 REPLACE THIS with the email address where you want to receive submissions
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>

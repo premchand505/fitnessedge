@@ -8,7 +8,7 @@ const servicesData = [
   { id: 'training', name: 'Personal Training', description: 'Get 1-on-1 guidance from our elite trainers. We build a custom plan focused on your goals, your body, and your success. Perfect for beginners needing direction or athletes pushing their limits.', imageSrc: '/images/services/services-personal.jpg' },
   { id: 'group', name: 'Group Fitness', description: 'Experience the energy of our community. From high-intensity HIIT circuits to strength-building bootcamps, our group classes are designed to motivate, challenge, and deliver results.', imageSrc: '/images/services/services-group.jpg' },
   { id: 'nutrition', name: 'Nutritional Coaching', description: "Fitness is built in the kitchen. Our certified nutritionists work with you to create a sustainable, science-backed eating plan that fuels your workouts and transforms your life.", imageSrc: '/images/services/services-nutrition.jpg' },
-  { id: 'facilities', name: 'Facilities & Amenities', description: 'Train on industry-leading equipment, recover in our premium saunas and locker rooms, and refuel at our smoothie bar. We provide the elite environment you need to succeed.', imageA: '/images/services/interior.webp', imageB: '/images/services/interior2.webp' },
+  { id: 'facilities', name: 'Facilities & Amenities', description: 'Train on industry-leading equipment, recover in our premium saunas and locker rooms, and refuel at our smoothie bar. We provide the elite environment you need to succeed.', imageA: '/images/services/interior.jpg' },
 ];
 
 type ServiceId = (typeof servicesData)[number]['id'];
@@ -76,7 +76,7 @@ export default function Services() {
                 className="absolute inset-0"
               >
                 {activeService.id === 'facilities' ? (
-                  <div className="grid h-full grid-cols-1 grid-rows-2 gap-6 p-8">
+                  <div className="grid h-full p-8">
                     <div className="relative row-span-1 rounded-lg">
                       <Image
                         src={activeService.imageA!}
@@ -86,15 +86,7 @@ export default function Services() {
                         sizes="(max-width: 1024px) 100vw, 50vw"
                       />
                     </div>
-                    <div className="relative row-span-1 rounded-lg">
-                      <Image
-                        src={activeService.imageB!}
-                        alt="Fitness Edge amenities"
-                        fill
-                        className="rounded-lg object-cover"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                      />
-                    </div>
+                    
                   </div>
                 ) : (
                   <div className="grid h-full grid-cols-1 md:grid-cols-2">

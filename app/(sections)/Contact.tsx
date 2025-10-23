@@ -65,15 +65,15 @@ export default function Contact() {
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 text-lg">
   <ContactDetail icon={MapPin} title="Visit Our Gym">
     <address className="not-italic">
-      Reliance fresh , Kurmnnapalem
+      Reliance fresh , Kurmannapalem
       <br />
       Vizag, 530046
     </address>
   </ContactDetail>
 
   <ContactDetail icon={Phone} title="Call Us">
-    <a href="tel:+911234567890" className="transition-colors hover:text-accent">
-      +91 12345 67890
+    <a href="tel:+917306835380" className="transition-colors hover:text-accent">
+      +91 7306835380
     </a>
   </ContactDetail>
 

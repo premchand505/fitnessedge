@@ -15,7 +15,7 @@ const trainers = [
     {
     name: 'K Vivek',
     specialty: 'Powerlifting Coach',
-    imageSrc: '/images/trainers/vivek.jpg',
+    imageSrc: '/images/trainers/vivek1.jpg',
   },
   {
     name: 'Nookesh',

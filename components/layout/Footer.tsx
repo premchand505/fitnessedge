@@ -120,7 +120,7 @@ export default function Footer() {
                <p>
                  <a href="mailto:appuson@gmail.com">
                    <span className={`transition hover:brightness-125 ${gradientText}`}>
-                     appuson@gmail.com
+                     officialappuson@gmail.com
                    </span>
                  </a>
                </p>
