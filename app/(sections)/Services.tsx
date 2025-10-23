@@ -8,7 +8,7 @@ const servicesData = [
   { id: 'training', name: 'Personal Training', description: 'Get 1-on-1 guidance from our elite trainers. We build a custom plan focused on your goals, your body, and your success. Perfect for beginners needing direction or athletes pushing their limits.', imageSrc: '/images/services/services-personal.jpg' },
   { id: 'group', name: 'Group Fitness', description: 'Experience the energy of our community. From high-intensity HIIT circuits to strength-building bootcamps, our group classes are designed to motivate, challenge, and deliver results.', imageSrc: '/images/services/services-group.jpg' },
   { id: 'nutrition', name: 'Nutritional Coaching', description: "Fitness is built in the kitchen. Our certified nutritionists work with you to create a sustainable, science-backed eating plan that fuels your workouts and transforms your life.", imageSrc: '/images/services/services-nutrition.jpg' },
-  { id: 'facilities', name: 'Facilities & Amenities', description: 'Train on industry-leading equipment, recover in our premium saunas and locker rooms, and refuel at our smoothie bar. We provide the elite environment you need to succeed.', imageA: '/images/services/gym-interior.avif', imageB: '/images/services/gym-interior2.avif' },
+  { id: 'facilities', name: 'Facilities & Amenities', description: 'Train on industry-leading equipment, recover in our premium saunas and locker rooms, and refuel at our smoothie bar. We provide the elite environment you need to succeed.', imageA: '/images/services/interior.webp', imageB: '/images/services/interior2.webp' },
 ];
 
 type ServiceId = (typeof servicesData)[number]['id'];

@@ -7,31 +7,22 @@ import TrainerCard from '@/components/ui/TrainerCard';
 
 const trainers = [
   {
-    name: 'Alex Ray',
+    name: 'Eswar Kalyan',
     specialty: 'Strength & Conditioning',
    
-    imageSrc: '/images/trainers/trainer-01.png',
+    imageSrc: '/images/trainers/kalyan.jpg',
+  },
+    {
+    name: 'K Vivek',
+    specialty: 'Powerlifting Coach',
+    imageSrc: '/images/trainers/vivek.jpg',
   },
   {
-    name: 'Mia Chen',
+    name: 'Nookesh',
     specialty: 'HIIT & Functional',
     imageSrc: '/images/trainers/trainer-01.png',
   },
-  {
-    name: 'David Lee',
-    specialty: 'Powerlifting Coach',
-    imageSrc: '/images/trainers/trainer-01.png',
-  },
-  {
-    name: 'Sarah Kim',
-    specialty: 'Yoga & Mobility',
-    imageSrc: '/images/trainers/trainer-01.png',
-  },
-  {
-    name: 'Kenji Ito',
-    specialty: 'Nutrition & Wellness',
-    imageSrc: '/images/trainers/trainer-01.png',
-  },
+
 ];
 
 const slideInVariant: Variants = {
@@ -69,7 +60,7 @@ export default function AboutUs() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <Image
-              src="/images/about/about.jpeg"
+              src="/images/about/group.png"
               alt="Trainer working with a senior client"
               fill
               className="rounded-lg object-cover shadow-2xl" // object-cover prevents stretching
@@ -89,7 +80,7 @@ export default function AboutUs() {
               Our <span className="text-accent-400">Philosophy</span>
             </h2>
             <p className="mt-6 text-lg leading-8 text-transparent bg-clip-text bg-linear-to-b from-white  to-white/50">
-              At FITNESS EDGE, we believe fitness is a journey of inclusive,
+              At APPUSON FITNESS, we believe fitness is a journey of inclusive,
               personal reinvention. We're not just a gym; we're a community
               dedicated to helping everyone—from beginners to seasoned athletes—
               find their unique edge.
@@ -102,7 +93,7 @@ export default function AboutUs() {
           </motion.div>
         </div>
 
-        <div className="mt-32 z-30">
+        <div className="mt-32 z-30 flex flex-col ">
           <h2 className="text-center font-heading text-5xl  uppercase text-transparent bg-clip-text bg-linear-to-b from-white to-white/50 sm:text-6xl">
             Meet The <span className="text-accent-400">Crew</span>
           </h2>

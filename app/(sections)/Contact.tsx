@@ -29,7 +29,7 @@ export default function Contact() {
     <section id="contact" className="w-full bg-base py-24 sm:py-32 bg-linear-to-r from-black-950 to to-black-900">
       <div className="container mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="font-heading text-5xl uppercase text-transparent bg-clip-text bg-linear-to-b from-white to-white/50 sm:text-6xl">
+          <h2 className="font-heading text-4xl uppercase text-transparent bg-clip-text bg-linear-to-b from-white to-white/50 sm:text-6xl">
             Join The <span className="text-accent-400">Reinvention</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-transparent bg-clip-text bg-linear-to-b from-white to-white/50">

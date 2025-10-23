@@ -4,17 +4,22 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Link from 'next/link';
 import Button from '../ui/Button';
 
-const navLinks = [
-  { name: 'Home', href: '/#home' },
-  { name: 'About Us', href: '/#about' },
-  { name: 'Services', href: '/#services' },
-  { name: 'Pricing', href: '/#pricing' },
-  { name: 'Contact', href: '/#contact' },
-];
+// 1. Define the type for a single navigation link
+type NavLink = {
+  name: string;
+  href: string;
+};
+
+// 2. Define the props interface for your component to accept navLinks
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+  navLinks: NavLink[]; // This line fixes the error
+}
 
 const menuVariants: Variants = {
-  hidden: { x: '100%', transition: { type: 'spring', stiffness: 300, damping: 30 } },
-  visible: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } },
+  hidden: { x: '100%', transition: { type: 'spring', stiffness: 400, damping: 40 } },
+  visible: { x: 0, transition: { type: 'spring', stiffness: 400, damping: 40 } },
 };
 
 const linkVariants: Variants = {
@@ -27,26 +32,24 @@ const linkVariants: Variants = {
   exit: { opacity: 0, x: 20, transition: { ease: 'easeIn' } },
 };
 
-interface MobileMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks }) => {
   return (
     <AnimatePresence>
       {isOpen && (
         <>
+          {/* Backdrop Overlay */}
           <motion.div
-            className="fixed inset-0 z-40 bg-white"
+            className="fixed inset-0 z-40 bg-black/40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
 
+          {/* Menu Panel */}
           <motion.div
-            className="fixed right-0 top-0 z-50 h-full w-full max-w-sm bg-base p-6 shadow-xl"
+            className="fixed right-0 top-0 z-50 h-full w-full max-w-sm border-l border-white/10 bg-black/50 p-6 shadow-xl backdrop-blur-lg"
             variants={menuVariants}
             initial="hidden"
             animate="visible"
@@ -54,21 +57,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           >
             <div className="flex h-full flex-col">
               <div className="flex items-center justify-between">
-                {/* --- More Color --- */}
-                <span className="font-heading text-2xl uppercase text-accent">
+                <span className="font-heading text-2xl uppercase text-transparent bg-clip-text bg-linear-to-b from-white to-white/50">
                   Menu
                 </span>
                 <button
                   onClick={onClose}
-                  className="rounded-full p-2 text-3xl text-primary-dark transition-colors hover:bg-secondary-neutral"
+                  className="rounded-full p-2 text-3xl text-white/70 transition-colors hover:bg-white/10 hover:text-white"
                   aria-label="Close menu"
                 >
                   &times;
                 </button>
               </div>
 
-              <nav className="mt-12 flex grow">
+              <nav className="mt-12 flex grow text-white">
                 <ul>
+                  {/* Now mapping over the `navLinks` prop */}
                   {navLinks.map((link, i) => (
                     <motion.li
                       key={link.name}
@@ -81,7 +84,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                       <Link
                         href={link.href}
                         onClick={onClose}
-                        className="block py-4 font-heading text-4xl uppercase text-primary-dark transition-colors hover:text-accent"
+                        className="block py-4 font-heading text-4xl uppercase "
                       >
                         {link.name}
                       </Link>
@@ -91,11 +94,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
               </nav>
 
               <div className="mt-auto flex flex-col gap-4">
+                 <Button href="https://play.google.com/store/apps/details?id=com.fitgymsoftware.fitnessedge&pcampaignid=web_share" variant="solid" onClick={onClose}>
+                  Download App
+                </Button>
                 <Button href="/#contact" variant="solid" onClick={onClose}>
                   Join Now
-                </Button>
-                <Button href="#" variant="outline">
-                  Download App
                 </Button>
               </div>
             </div>

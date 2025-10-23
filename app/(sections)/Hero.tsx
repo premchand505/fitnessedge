@@ -85,7 +85,7 @@ export default function Hero() {
         >
           <motion.div
             variants={lineDrawVariant}
-            className="mb-4 h-[2px] w-24 origin-left bg-accent"
+            className="mb-4 h-0.5 w-24 origin-left bg-accent"
           ></motion.div>
 
           <h1 className="font-heading text-5xl font-extrabold uppercase leading-tight tracking-tighter md:text-8xl ">
@@ -106,7 +106,7 @@ export default function Hero() {
             variants={fadeUpVariant}
             className="mt-8 max-w-md text-lg font-light text-accent-300 md:text-xl"
           >
-            Break free. We provide the tools. You provide the will.
+            <span className='text-2xl font-medium'> Transform YourSelf</span> <br/>We provide the tools. You provide the will.
           </motion.p>
 
           <motion.div variants={fadeUpVariant} className="mt-10">
@@ -115,7 +115,7 @@ export default function Hero() {
               variant="solid"
               className="px-10 py-4 text-lg font-bold uppercase  texttracking-widest"
             >
-              Escape
+              JOIN NOW
             </Button>
           </motion.div>
         </motion.div>
