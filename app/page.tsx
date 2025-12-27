@@ -6,12 +6,14 @@ import Contact from './(sections)/Contact';
 
 export default function Home() {
   return (
-    <>
-      <Hero />
+    <div className='overflow-hidden'>
+         <Hero />
       <AboutUs />
       <Services />
       <Pricing />
       <Contact />
-    </>
+    </div>
+   
+ 
   );
 }
